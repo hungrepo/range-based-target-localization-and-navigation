@@ -9,15 +9,15 @@ h3 = plot(q(:,1),q(:,2), 'LineWidth',2);
 h4 = plot(q(1,1),q(1,2), 'p', 'MarkerSize', 10,'LineWidth',2); hold on;
 %end
 h5 = plot(q_hat_ekf(:,1),q_hat_ekf(:,2),'-o','Color', 'r', 'MarkerSize',1);
-h6 = plot(q_hat_ekf(1,1),q_hat_ekf(1,2),'-o','Color', 'r', 'MarkerSize',10);
+h6 = plot(q_hat_ekf(1,1),q_hat_ekf(1,2),'o','Color', 'r', 'MarkerSize',10);
 
 h7 = plot(q_hat_kf(:,1),q_hat_kf(:,2),'-o','Color', 'b', 'MarkerSize',1);
-h8 = plot(q_hat_kf(1,1),q_hat_kf(1,2),'-o','Color', 'b', 'MarkerSize',10);
+h8 = plot(q_hat_kf(1,1),q_hat_kf(1,2),'o','Color', 'b', 'MarkerSize',10);
 
 xlabel('X[m]','FontSize',12,'Interpreter','latex');
 ylabel('Y[m]','FontSize',12,'Interpreter','latex');
-legend([h1,h2,h3,h4,h5,h7],'Vehicle', 'Vehicles initial position','Target', 'Targets initial position',...,
-       'EKF' , 'KF-LTV'); 
+legend([h1,h2,h3,h4,h5,h7,h8],'Vehicle', 'Vehicles initial position','Target', 'Targets initial position',...,
+       'EKF' , 'KF-LTV', 'Initial target position'); 
 title('Trajectories of vehicle, target, and estimated targets');
 % Plot position and velocity errors
 

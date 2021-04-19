@@ -3,21 +3,21 @@ n=length(time);
 fig1 = figure(1);
 set(fig1,'position',[0 0 550 400]);
 %if strcmp(filter,'EKF');
-plot(p(:,1),p(:,2), 'LineWidth',2,'Color','c'); hold on;
-plot(p(1,1),p(1,2), '>','Markersize',10, 'LineWidth',2,'Color','c');
-plot(q(:,1),q(:,2), 'LineWidth',2); 
-plot(q(1,1),q(1,2), 'p', 'MarkerSize', 10,'LineWidth',2); hold on;
+h1 = plot3(p(:,1),p(:,2),p(:,3), 'LineWidth',2,'Color','c'); hold on;
+h2 = plot3(p(1,1),p(1,2),p(1,3), '>','Markersize',10, 'LineWidth',2,'Color','c');
+h3 = plot3(q(:,1),q(:,2),q(:,3), 'LineWidth',2); 
+h4 = plot3(q(1,1),q(1,2),q(1,3), 'p', 'MarkerSize', 10,'LineWidth',2); hold on;
 %end
-plot(q_hat_ekf(:,1),q_hat_ekf(:,2),'-o','Color', 'r', 'MarkerSize',1);
-plot(q_hat_ekf(1,1),q_hat_ekf(1,2),'-o','Color', 'r', 'MarkerSize',10);
+h5 = plot3(q_hat_ekf(:,1),q_hat_ekf(:,2),'-o','Color', 'r', 'MarkerSize',1);
+h6 = plot3(q_hat_ekf(1,1),q_hat_ekf(1,2),'o','Color', 'r', 'MarkerSize',10);
 
-plot(q_hat_kf(:,1),q_hat_kf(:,2),'-o','Color', 'b', 'MarkerSize',1);
-plot(q_hat_kf(1,1),q_hat_kf(1,2),'-o','Color', 'b', 'MarkerSize',10);
+h7 = plot3(q_hat_kf(:,1),q_hat_kf_hung(:,2),'-o','Color', 'b', 'MarkerSize',1);
+h8 = plot3(q_hat_kf(1,1),q_hat_kf_hung(1,2),'o','Color', 'b', 'MarkerSize',10);
 
 xlabel('X[m]','FontSize',12,'Interpreter','latex');
 ylabel('Y[m]','FontSize',12,'Interpreter','latex');
-legend('Vehicles trajectory', 'Vehicles initial position','Target trajectory', 'Target position',...,
-       'estimated position with EKF' , 'estimated position with KF_LTV'); 
+legend([h1,h2,h3,h4,h5,h7,h8],'Vehicle', 'Vehicles initial position','Target', 'Targets initial position',...,
+       'EKF' , 'KF-LTV', 'Initial target position'); 
 title('Trajectories of vehicle, target, and estimated targets');
 % Plot position and velocity errors
 

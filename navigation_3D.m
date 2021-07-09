@@ -12,15 +12,14 @@ function range_based_navigation_3D
 
     clear all;
     rng('default');
-
+    
 %% Setup for simulation
-
-    Ts = 0.1;                             % frequency : 50Hz              as in the paper of Prof. Giovanni 
-    tf = 100;                               % simulation time 
+    Ts = 0.02;                            % frequency : 50Hz              as in the paper of Prof. Giovanni 
+    tf = 100;                             % simulation time 
     time = [];
 % beacon position
   s = [0;0; -50];
-%    s = [ 2; 3; 1];
+%    s = [ 2; 3; 1];                      % beacon position in paper of Prof. Giovanni   
 % parameter for vehicle velocity vector - this is for a new simulation
 % Not for the paper of Prof. Giovani
     rx = 50; 
@@ -36,7 +35,14 @@ function range_based_navigation_3D
     p_hat = [10; -15; 5];
     vc_hat = [0.1; -0.1; 0.1];
 % setup filters
-filter = 'KF_Hung';
+% for a comparision purpose we can set 4 options here:
+    %   EKF_Hung: for original nonlinear system
+    %   KF_Hung:  for LTV system in our (new) paper
+    %   KF_Giovanni: for the LTV system in Giovanni paper (https://ieeexplore.ieee.org/document/7393547)
+    %   KF_Batista:  for the LTV system in Batista paper  (https://www.sciencedirect.com/science/article/abs/pii/S0167691111001174) 
+
+    filter = 'EKF_Hung';                                      
+ 
 if (strcmp(filter,'EKF_Hung') )                           % for initialze EKF
     r_hat = p_hat -s;
     x_hat = [r_hat; vc_hat];
@@ -76,11 +82,12 @@ end
 for t = 0:Ts:tf;
     time=[time t];
     range(:,end+1) = norm(p(:,end)-s) + 0.5*randn;                              % range measurment
-%   This velocity vector for our new paper and thesis - it is more realistic than that in paper of Prof. Giovani   
+%   This velocity vector for our new paper and thesis - it is more realistic than that in paper of Prof. Giovani  
+
     u(:,end+1) = [ rx*omega*cos(omega*t);                                   % vehicle velocity  
                   -ry*omega*sin(omega*t); 
                    2*sin(t) - 0.3];
-%   This velocity vector from the paper of Prof. Giovani
+% %   This velocity vector from the paper of Prof. Giovani
 %      u(:,end+1) = [ 2*cos(t);
 %                    -4*sin(2*t);
 %                     cos(t/2)];           

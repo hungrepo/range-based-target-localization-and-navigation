@@ -1,18 +1,12 @@
-%% This EKF for one range, written in the standard form used in the paper entitled
+%%
+%% This code is used to generate simulation results for one tracker- one target in the paper entitled: 
 
-%   Cooperative distributed estimation and control of multiple autonomous vehicles 
-%   for range-based underwater target localization and pursuit”
+%  Range-based navigation and target localization: observability analysis,
+%  guidlines for motion planning, and filter design
 
-%   Authors: Nguyen T. Hung, Francisco Rego, Antonio Pascoal, Institute System and Robotic, IST, Lisbon
+%   Authors: Nguyen T. Hung, Antonio Pascoal, Institute for System and Robotic, IST, Lisbon
 %   Contact: nguyen.hung@tecnico.ulisboa.pt
 %   More information: https://nt-hung.github.io/research/Range-based-target-localization/
-         
-%% Note: 
-% This standard form  is equivalent with the
-% information form in the paper. For the case of single tracker-single target, this form is simpler 
-% than the information form but the results are equivelent. We use the information form in distributed setup, which is
-% more convenient
-% =========================================================================================================================
 
 function [xhatOut,POut] = KF_Nav3D_LTV_Batista(y,xhat,P,Ts,t,u) 
 % Tunning parameter of the EKF
